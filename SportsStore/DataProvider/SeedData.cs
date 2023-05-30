@@ -56,24 +56,25 @@ namespace SportsStore.DataProvider
                     {
                         Name = "Roland T-909",
                         Description = "The Legendary T-909",
-                        Category = "Drum Machine",
+                        Category = "Drum Machines",
                         Price = 599
                     },
                     new Product
                     {
-                        Name = "Be",
-                        Description = "The Legendary T-909",
-                        Category = "Drum Machine",
+                        Name = "Arturia BeatStep Pro",
+                        Description = "The Legendary BeatStep Pro",
+                        Category = "Drum Machines",
                         Price = 499
                     },
                     new Product
                     {
-                        Name = "Roland T-909",
-                        Description = "The Legendary T-909",
-                        Category = "Drum Machine",
+                        Name = "Behringher Heavy Distortion Pedal",
+                        Description = "The Legendary Heavy Distortion Pedal",
+                        Category = "Pedal Effects",
                         Price = 499
                     }
                 );
+                ctx.SaveChanges();
             }
         }
     }
