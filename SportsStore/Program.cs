@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SportsStore.DataProvider;
 using SportsStore.DataProvider.Interfaces;
 using SportsStore.DataProvider.Repository;
+using SportsStore.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +18,8 @@ builder.Services.AddDbContext<StoreDBContext>(opt =>
 builder.Services.AddRazorPages();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();
 
