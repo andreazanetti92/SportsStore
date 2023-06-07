@@ -43,15 +43,15 @@ namespace SportsStore.Tests
             mockedContext.SetupGet(c => c.Session).Returns(mockedSession.Object);
 
             // Action
-            CartModel cartModel = new CartModel(mockedRepo.Object)
-            {
-                PageContext = new PageContext(new ActionContext
-                {
-                    HttpContext = mockedContext.Object,
-                    RouteData = new Microsoft.AspNetCore.Routing.RouteData(),
-                    ActionDescriptor = new PageActionDescriptor()
-                })
-            };
+            CartModel cartModel = new CartModel(mockedRepo.Object, testCart);
+            //{
+            //    PageContext = new PageContext(new ActionContext
+            //    {
+            //        HttpContext = mockedContext.Object,
+            //        RouteData = new Microsoft.AspNetCore.Routing.RouteData(),
+            //        ActionDescriptor = new PageActionDescriptor()
+            //    })
+            //};
 
             cartModel.OnGet("myUrl");
 
@@ -85,15 +85,15 @@ namespace SportsStore.Tests
             mockedHttpContext.SetupGet(c => c.Session).Returns(mockedSession.Object);
 
             // Action
-            CartModel cartModel = new CartModel(mockedRepo.Object)
-            {
-                PageContext = new PageContext(new ActionContext
-                {
-                    HttpContext = mockedHttpContext.Object,
-                    RouteData = new Microsoft.AspNetCore.Routing.RouteData,
-                    ActionDescriptor = new PageActionDescriptor()
-                })
-            };
+            CartModel cartModel = new(mockedRepo.Object, testCart);
+            //{
+            //    PageContext = new PageContext(new ActionContext
+            //    {
+            //        HttpContext = mockedHttpContext.Object,
+            //        RouteData = new Microsoft.AspNetCore.Routing.RouteData,
+            //        ActionDescriptor = new PageActionDescriptor()
+            //    })
+            //};
 
             // Assert
             Assert.Single(testCart.Lines);
