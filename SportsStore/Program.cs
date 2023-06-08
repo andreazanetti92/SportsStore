@@ -25,11 +25,9 @@ builder.Services.AddScoped<IStoreRepository, StoreRepository>();
 
 var app = builder.Build();
 
-
 //app.MapGet("/", () => "Hello World!");
 app.UseStaticFiles();
 app.UseSession();
-
 
 app.MapControllerRoute("catpage", "{category}/Page{productPage:int}",
     new { Controller = "Home", action = "Index" });

@@ -20,9 +20,9 @@ namespace SportsStore.Tests
         public void Can_Load_Cart()
         {
             // Arrange - create a mock repository
-            Product p1 = new Product { ProductID = 1, Name = "P1" };
-            Product p2 = new Product { ProductID = 2, Name = "P2" };
-            Mock<IStoreRepository> mockedRepo = new Mock<IStoreRepository>();
+            Product p1 = new() { ProductID = 1, Name = "P1" };
+            Product p2 = new() { ProductID = 2, Name = "P2" };
+            Mock<IStoreRepository> mockedRepo = new();
             mockedRepo.Setup(m => m.Products).Returns((new Product[]
             {
                 p1, p2
@@ -35,15 +35,15 @@ namespace SportsStore.Tests
             testCart.AddItem(p2, 1);
 
             // Arrange - Create a mock page and session 
-            Mock<ISession> mockedSession = new Mock<ISession>();
+            Mock<ISession> mockedSession = new();
             byte[] data = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(testCart));
             mockedSession.Setup(c => c.TryGetValue(It.IsAny<string>(), out data));
 
-            Mock<HttpContext> mockedContext = new Mock<HttpContext>();
+            Mock<HttpContext> mockedContext = new();
             mockedContext.SetupGet(c => c.Session).Returns(mockedSession.Object);
 
             // Action
-            CartModel cartModel = new CartModel(mockedRepo.Object, testCart);
+            CartModel cartModel = new(mockedRepo.Object, testCart);
             //{
             //    PageContext = new PageContext(new ActionContext
             //    {
@@ -52,7 +52,6 @@ namespace SportsStore.Tests
             //        ActionDescriptor = new PageActionDescriptor()
             //    })
             //};
-
             cartModel.OnGet("myUrl");
 
             // Assert
@@ -64,7 +63,7 @@ namespace SportsStore.Tests
         public void Can_Update_Cart()
         {
             // Arrange - Create a mock repository
-            Mock<IStoreRepository> mockedRepo = new Mock<IStoreRepository>();
+            Mock<IStoreRepository> mockedRepo = new();
             mockedRepo.Setup(m => m.Products).Returns((new Product[]
             {
                 new Product { ProductID = 1, Name = "P1"}
@@ -73,7 +72,7 @@ namespace SportsStore.Tests
 
             Cart? testCart = new();
 
-            Mock<ISession> mockedSession = new Mock<ISession>();
+            Mock<ISession> mockedSession = new();
 
             mockedSession.Setup(s => s.Set(It.IsAny<string>(), It.IsAny<byte[]>()))
                 .Callback<string, byte[]>((key, val) =>
@@ -81,7 +80,7 @@ namespace SportsStore.Tests
                     testCart = JsonSerializer.Deserialize<Cart>(Encoding.UTF8.GetString(val));
                 });
 
-            Mock<HttpContext> mockedHttpContext = new Mock<HttpContext>();
+            Mock<HttpContext> mockedHttpContext = new();
             mockedHttpContext.SetupGet(c => c.Session).Returns(mockedSession.Object);
 
             // Action
