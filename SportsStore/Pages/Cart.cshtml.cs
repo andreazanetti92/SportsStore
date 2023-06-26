@@ -16,9 +16,9 @@ namespace SportsStore.Pages
             _repository = repository;
             Cart = cartService;
         }
-
         public Cart? Cart { get; set; }
         public string ReturnUrl { get; set; } = "/";
+
 
         public void OnGet(string returnUrl)
         {
@@ -32,7 +32,7 @@ namespace SportsStore.Pages
                 .FirstOrDefault(p => p.ProductID == productId);
             if(product is not null)
             {
-                Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+                //Cart = HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
                 Cart.AddItem(product, 1);
                 // HttpContext.Session.SetJson("cart", Cart); // OLD METHOD
             }

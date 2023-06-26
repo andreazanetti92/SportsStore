@@ -72,19 +72,20 @@ namespace SportsStore.Tests
 
             Cart? testCart = new();
 
-            Mock<ISession> mockedSession = new();
+            //Mock<ISession> mockedSession = new();
 
-            mockedSession.Setup(s => s.Set(It.IsAny<string>(), It.IsAny<byte[]>()))
-                .Callback<string, byte[]>((key, val) =>
-                {
-                    testCart = JsonSerializer.Deserialize<Cart>(Encoding.UTF8.GetString(val));
-                });
+            //mockedSession.Setup(s => s.Set(It.IsAny<string>(), It.IsAny<byte[]>()))
+            //    .Callback<string, byte[]>((key, val) =>
+            //    {
+            //        testCart = JsonSerializer.Deserialize<Cart>(Encoding.UTF8.GetString(val));
+            //    });
 
-            Mock<HttpContext> mockedHttpContext = new();
-            mockedHttpContext.SetupGet(c => c.Session).Returns(mockedSession.Object);
+            //Mock<HttpContext> mockedHttpContext = new();
+            //mockedHttpContext.SetupGet(c => c.Session).Returns(mockedSession.Object);
 
             // Action
             CartModel cartModel = new(mockedRepo.Object, testCart);
+            cartModel.OnPost(1, "myUrl");
             //{
             //    PageContext = new PageContext(new ActionContext
             //    {
