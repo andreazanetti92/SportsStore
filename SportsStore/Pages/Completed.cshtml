@@ -1,0 +1,12 @@
+﻿@page
+
+<div class="text-center">
+    <h2>Thank!</h2>
+    <p>Thanks for placing an order #@Id </p>
+</div>
+
+
+@functions{
+    [BindProperty(SupportsGet = true)]
+    public string? Id { get; set; }
+}

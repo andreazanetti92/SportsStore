@@ -1,5 +1,4 @@
-﻿using AspNetCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SportsStore.DataProvider.Interfaces;
 using SportsStore.Models;
 
